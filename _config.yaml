@@ -5,3 +5,7 @@ url: "https://ahram12.github.io"
 baseurl: "/noreasonneeded.github.io"
 
 markdown: kramdown
+
+kramdown:
+  math_engine: mathjax
+  syntax_highlighter: rouge

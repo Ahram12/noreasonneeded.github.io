@@ -1,8 +1,18 @@
----
----
-
 <!DOCTYPE html>
 <html lang="en">
+
+<script>
+  MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      displayMath: [['$$', '$$'], ['\\[', '\\]']]
+    }
+  };
+</script>
+
+<script async
+        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+</script>
 
 <head>
     <meta charset="UTF-8">
@@ -10,10 +20,22 @@
     <meta name="viewport"
           content="width=device-width, initial-scale=1.0">
 
-    <title>No Reason Needed</title>
+    <title>
+        {% if page.title %}
+            {{ page.title }} - {{ site.title }}
+        {% else %}
+            {{ site.title }}
+        {% endif %}
+    </title>
 
     <link rel="stylesheet"
           href="{{ '/style.css' | relative_url }}">
+
+    <link rel="stylesheet"
+      href="{{ '/style.css' | relative_url }}">
+
+    <link rel="stylesheet"
+        href="{{ '/rouge.css' | relative_url }}">
 </head>
 
 <body>
@@ -23,7 +45,7 @@
 
         <a class="site-title"
            href="{{ '/' | relative_url }}">
-            No Reason Needed
+            {{ site.title }}
         </a>
 
         <nav>
@@ -38,34 +60,7 @@
 
 <main>
 
-    <h1>My Math Blog</h1>
-
-    <p>
-        Welcome! This is where I write about mathematics,
-        ideas, problems, and whatever else catches my attention.
-    </p>
-
-    <h2>Recent Posts</h2>
-
-    <ul class="post-list">
-
-        {% for post in site.posts limit:2 %}
-
-        <li>
-
-            <a href="{{ post.url | relative_url }}">
-                {{ post.title }}
-            </a>
-
-            <span class="post-date">
-                {{ post.date | date: "%B %d, %Y" }}
-            </span>
-
-        </li>
-
-        {% endfor %}
-
-    </ul>
+    {{ content }}
 
 </main>
 
@@ -73,7 +68,7 @@
 <footer>
 
     <p>
-        © {{ site.time | date: "%Y" }} No Reason Needed
+        © {{ site.time | date: "%Y" }} {{ site.title }}
     </p>
 
 </footer>

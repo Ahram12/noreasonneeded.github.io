@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<script>
+  MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      displayMath: [['$$', '$$'], ['\\[', '\\]']]
+    }
+  };
+</script>
+
+<script async
+        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+</script>
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>
+        
+            A Second Mathematical Thought - No Reason Needed
+        
+    </title>
+
+    <link rel="stylesheet"
+          href="/noreasonneeded.github.io/style.css">
+
+    <link rel="stylesheet"
+      href="/noreasonneeded.github.io/style.css">
+
+    <link rel="stylesheet"
+        href="/noreasonneeded.github.io/rouge.css">
+</head>
+
+<body>
+
+<header>
+    <div class="header-inner">
+
+        <a class="site-title"
+           href="/noreasonneeded.github.io/">
+            No Reason Needed
+        </a>
+
+        <nav>
+            <a href="/noreasonneeded.github.io/">Home</a>
+            <a href="/noreasonneeded.github.io/about.html">About</a>
+            <a href="/noreasonneeded.github.io/projects/">Projects</a>
+        </nav>
+
+    </div>
+</header>
+
+
+<main>
+
+    <article class="post">
+
+    <header class="post-header">
+
+        <h1>A Second Mathematical Thought</h1>
+
+        <p class="post-date">
+            August 22, 2026
+        </p>
+
+    </header>
+
+    <div class="post-content">
+
+        <h2 id="a-useful-limit">A useful limit</h2>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">fibonacci</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span>
+
+    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+        <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="n">b</span><span class="p">,</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span>
+
+    <span class="k">return</span> <span class="n">a</span>
+</code></pre></div></div>
+
+<h3 id="theorem">Theorem</h3>
+
+<div class="theorem"> For $x \ne 0$,
+
+$$
+\lim_{x\to 0}\frac{\sin x}{x}=1.
+$$
+
+</div>
+
+<h3 id="proof">Proof</h3>
+
+<div class="proof">
+
+We begin with the squeeze theorem...
+
+$$
+\cos x \leq \frac{\sin x}{x} \leq 1.
+$$
+
+Therefore, taking the limit gives the result.
+
+</div>
+
+<h3 id="example">Example</h3>
+
+<div class="example">
+Consider
+
+$$
+f(x)=x^2.
+$$
+
+Then...
+
+</div>
+
+
+    </div>
+
+</article>
+
+</main>
+
+
+<footer>
+
+    <p>
+        © 2026 No Reason Needed
+    </p>
+
+</footer>
+
+</body>
+</html>
