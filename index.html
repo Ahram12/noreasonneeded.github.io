@@ -12,7 +12,12 @@
     <h2>Recent Posts</h2>
 
     <ul>
-        <li><a href="_posts/2026-08-22.html">Understanding Limits</a></li>
+        {% for post in site.posts %}
+        <li>
+            <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
+            <small>{{ post.date | date: "%B %d, %Y" }}</small>
+        </li>
+        {% endfor %}
     </ul>
 
 </body>
