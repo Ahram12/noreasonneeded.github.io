@@ -1,6 +1,7 @@
 title: "No Reason Needed"
 description: "A mathematics blog"
-baseurl: "/noreasonneeded.github.io"
-url: "https://ahram12.github.io"
 
-theme: minima
+url: "https://ahram12.github.io"
+baseurl: "/noreasonneeded.github.io"
+
+markdown: kramdown
