@@ -1,12 +1,23 @@
 <!DOCTYPE html>
-<html>
-<head>
-    <meta charset="UTF-8">
-    <title>{{ page.title }} - No Reason Needed</title>
+<html lang="en">
 
-    <link rel="stylesheet" href="{{ '/style.css' | relative_url }}">
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>
+        {{ page.title }} - No Reason Needed
+    </title>
+
+    <link rel="stylesheet"
+          href="{{ '/style.css' | relative_url }}">
+
 
     <!-- MathJax -->
+
     <script>
     window.MathJax = {
         tex: {
@@ -19,25 +30,70 @@
     <script async
         src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js">
     </script>
+
 </head>
+
 
 <body>
 
-    <header>
-        <h1>
-            <a href="{{ '/' | relative_url }}">No Reason Needed</a>
+
+<header>
+
+    <div class="header-inner">
+
+        <a class="site-title"
+           href="{{ '/' | relative_url }}">
+            No Reason Needed
+        </a>
+
+        <nav>
+
+            <a href="{{ '/' | relative_url }}">
+                Home
+            </a>
+
+            <a href="{{ '/about.html' | relative_url }}">
+                About
+            </a>
+
+        </nav>
+
+    </div>
+
+</header>
+
+
+<main>
+
+    <article>
+
+        <h1 class="post-title">
+            {{ page.title }}
         </h1>
-    </header>
 
-    <main>
-        <h1>{{ page.title }}</h1>
+        <div class="post-meta">
 
-        <p>
-            <em>{{ page.date | date: "%B %d, %Y" }}</em>
-        </p>
+            {{ page.date | date: "%B %d, %Y" }}
+
+        </div>
+
 
         {{ content }}
-    </main>
+
+
+    </article>
+
+</main>
+
+
+<footer>
+
+    <p>
+        © {{ site.time | date: "%Y" }} No Reason Needed
+    </p>
+
+</footer>
+
 
 </body>
 </html>
