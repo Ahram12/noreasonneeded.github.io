@@ -1,7 +1,8 @@
 ---
 layout: post
 title: "Studying Asymptotics of Flipping Coins"
-date: 2026-08-22
+date: 2026-08-22 10:00:00 -0700
+categories: mathematics
 ---
 
 ## A useful limit
