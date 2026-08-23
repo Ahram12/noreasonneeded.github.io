@@ -81,11 +81,11 @@ as claimed.
 
 This is again another $\mathcal{O}(nk^{2})$ algorithm. So, it seems like we're going in circles, however, setting our two representations equal to one another (and re-indexing) we get:
 
-$$ p\sum_{j = 0}^{k - 1}S(n, j)\binom{k}{j} + S(n, k) = np\sum_{j = 0}^{k - 1}S(n, j)\binom{k - 1}{j}.$$ 
+$$ p\sum_{j = 0}^{k - 1}S(n, j)\binom{k}{j} + S(n, k) = (n + 1)p\sum_{j = 0}^{k - 1}S(n, j)\binom{k - 1}{j}.$$ 
 
 Rearranging:
 
-$$ S(n,k) = np\sum_{j = 0}^{k - 1}S(n, j)\binom{k - 1}{j} - p\sum_{j = 0}^{k - 1}S(n, j)\binom{k}{j}.$$
+$$ S(n,k) = (n + 1)p\sum_{j = 0}^{k - 1}S(n, j)\binom{k - 1}{j} - p\sum_{j = 0}^{k - 1}S(n, j)\binom{k}{j}.$$
 
 So, given a fixed $n$ we can suppress it in the notation, writing $S(n,k) \equiv S(k)$ and our equation becomes:
 
