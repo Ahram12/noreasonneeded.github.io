@@ -51,7 +51,7 @@ $$
 as desired. 
 </div>
 
-This gives us a $\mathcal{O}(nk^{2})$ algorithm for determining our moments. We'll now determine a second representation for $S(n,k)$ using conditional expectation combined with our previous observation that the binomal is a sum of i.i.d Bernoulli Random variables. 
+This gives us a $\mathcal{O}(nk^{2})$ algorithm for determining our moments. We'll now determine a second representation for $S(n,k)$ using conditional expectation combined with our previous observation that the binoimal is a sum of i.i.d Bernoulli Random variables. 
 
 ### Lemma
 
@@ -77,13 +77,18 @@ S(n,k) &= \mathbb{E}(X^{k}) \\
 \end{align}
 $$
 as claimed.
-<div>
+</div>
 
 This is again another $\mathcal{O}(nk^{2})$ algorithm. So, it seems like we're going in circles, however, setting our two representations equal to one another (and re-indexing) we get:
 
-$$ p\sum_{j = 0}^{k - 1}S(n, j)\binom{k}{j} + S(n, k) = np\sum_{j = 0}^{k - 1}S(n, j)\binom{k - 1}{j}.$$ Rearranging:
+$$ p\sum_{j = 0}^{k - 1}S(n, j)\binom{k}{j} + S(n, k) = np\sum_{j = 0}^{k - 1}S(n, j)\binom{k - 1}{j}.$$ 
+
+Rearranging:
+
 $$ S(n,k) = np\sum_{j = 0}^{k - 1}S(n, j)\binom{k - 1}{j} - p\sum_{j = 0}^{k - 1}S(n, j)\binom{k}{j}.$$
+
 So, given a fixed $n$ we can suppress it in the notation, writing $S(n,k) \equiv S(k)$ and our equation becomes:
+
 $$ S(k) = (n + 1)p\sum_{j = 0}^{k - 1}S(j)\binom{k - 1}{j} - p\sum_{j = 0}^{k - 1}S(j)\binom{k}{j}.$$
 
 This is $\mathcal{O}(k^{2})$, so we shaved off a factor of n! That is not unexpected here given that we are fixing $n$ but does give us a pretty quick solution for many CodeForces problems.
