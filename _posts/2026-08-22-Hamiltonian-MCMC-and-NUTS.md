@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "My First Math Post"
+title: "Hamiltonian MCMC and NUTS"
 date: 2026-08-22 10:00:00 -0700
 categories: mathematics
 ---

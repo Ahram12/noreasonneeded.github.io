@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "A Second Mathematical Thought"
+title: "Studying Asymptotics of Flipping Coins"
 date: 2026-08-22
 ---
 
