@@ -11,7 +11,7 @@ One idea I have seen come up over and over again in CodeForces is a need to comp
 
 <div class="definition"> 
 
-If a random variable $X$ follows the Binomial distribution then there exist parameters $$ n \in \mathbb{N}, p \in [0,1]$$ such that for any $ 0 \leq j \leq n,$ $$ P(X = j) = \binom{n}{j}p^{j}(1 - p)^{n - j}.$$ Equivalently, $X$  is the sum of $n$ i.i.d Bernoulli Random distributions that each have an individual probability $p$ of occurring.  
+If a random variable $X$ follows the Binomial distribution then there exist parameters $$ n \in \mathbb{N}, p \in [0,1]$$ such that for any $ 0 \leq j \leq n,$ $$ P(X = j) = \binom{n}{j}p^{j}(1 - p)^{n - j}.$$ Equivalently, $X$  is the sum of $n$ i.i.d Bernoulli Random variables that each have an individual probability $p$ of occurring.  
 
 </div>
 
@@ -70,7 +70,7 @@ $$
 S(n,k) &= \mathbb{E}(X^{k}) \\
        &= \mathbb{E}((B_{1} + B_{2} +...+B_{n-1} + B_{n})^{k})\\
        &= \mathbb{E}((B_{1} + B_{2} +...+B_{n-1} + 1)^{k})p + \mathbb{E}((B_{1} + B_{2} +...+B_{n-1})^{k})(1-p)\\
-       &= p\sum_{j=0}^{k} \mathbb{E}((B_{1} + B_{2} +...+B_{n-1})^k)\binom{k}{j} + (1-p)S(n-1, k)\\
+       &= p\sum_{j=0}^{k} \mathbb{E}((B_{1} + B_{2} +...+B_{n-1})^j)\binom{k}{j} + (1-p)S(n-1, k)\\
        &= p\sum_{j=0}^{k}S(n-1,j)\binom{k}{j} + (1-p)S(n-1, k)\\ 
        &= p\sum_{j = 0}^{k - 1}S(n - 1, j)\binom{k}{j} + S(n- 1, k),
 
@@ -84,6 +84,6 @@ This is again another $\mathcal{O}(nk^{2})$ algorithm. So, it seems like we're g
 $$ p\sum_{j = 0}^{k - 1}S(n, j)\binom{k}{j} + S(n, k) = np\sum_{j = 0}^{k - 1}S(n, j)\binom{k - 1}{j}.$$ Rearranging:
 $$ S(n,k) = np\sum_{j = 0}^{k - 1}S(n, j)\binom{k - 1}{j} - p\sum_{j = 0}^{k - 1}S(n, j)\binom{k}{j}.$$
 So, given a fixed $n$ we can suppress it in the notation, writing $S(n,k) \equiv S(k)$ and our equation becomes:
-$$ S(k) = np\sum_{j = 0}^{k - 1}S(j)\binom{k - 1}{j} - p\sum_{j = 0}^{k - 1}S(j)\binom{k}{j}.$$
+$$ S(k) = (n + 1)p\sum_{j = 0}^{k - 1}S(j)\binom{k - 1}{j} - p\sum_{j = 0}^{k - 1}S(j)\binom{k}{j}.$$
 
 This is $\mathcal{O}(k^{2})$, so we shaved off a factor of n! That is not unexpected here given that we are fixing $n$ but does give us a pretty quick solution for many CodeForces problems.
