@@ -4,8 +4,7 @@ title: "Algorithms for Computing Moments of Binomial RVs"
 date: 2026-08-22 10:00:00 -0700
 categories: mathematics
 ---
-
-One idea I have seen come up over and over again in CodeForces is a need to compute moments of Binomial Random variables. The idea is pretty neat so I thought it would be worth talking through. First however, some definitions:
+A standard introduction to Probability often asks students to tediously compute various moments of distributions by hand, only to later tell them about things like Moment Generating Functions (MGFs). In general, they are a superior tool, however, some distributions actually allow for fairly clean recursive expositions without resorting to that machinery. To that point, in this post, our goal will be: given a Binomal Random Variable, with fixed support and probabilty, to describe a recursion for cumputing its moments. We will then take an exploratory approach, and describe other methods for making this process even more efficient. 
 
 ### Definition
 
@@ -16,7 +15,7 @@ If a random variable $X$ follows the Binomial distribution then there exist para
 </div>
 
 The quanity we are interested in computing is
-$ \mathbb{E}(X^{k}) $ for $k \in \mathbb{N}_{>0}$ and to do this we'll first introduce some notation by defining $S(n, k) = \mathbb{E}(X^{k})$. Next, we'll compute $S(n,k)$ two different ways. For our 
+$ \mathbb{E}(X^{k}) $ for $k \in \mathbb{N}$. For example, for $k = 0$ we $ \mathbb{E}(X^{k})  = 1$ and for $k = 1$ we have $ \mathbb{E}(X^{k})  = np$. Next, we'll first introduce some notation by defining $S(n, k) = \mathbb{E}(X^{k})$ and compute $S(n,k)$ two different ways. 
 
 ### Lemma
 
@@ -91,4 +90,8 @@ So, given a fixed $n$ we can suppress it in the notation, writing $S(n,k) \equiv
 
 $$ S(k) = (n + 1)p\sum_{j = 0}^{k - 1}S(j)\binom{k - 1}{j} - p\sum_{j = 0}^{k - 1}S(j)\binom{k}{j}.$$
 
-This is $\mathcal{O}(k^{2})$, so we shaved off a factor of n! That is not unexpected here given that we are fixing $n$ but does give us a pretty quick solution for many CodeForces problems.
+This is our sought after expression and it runs in $\mathcal{O}(k^{2})$. For a sanity check, we can plug in $k =1, 2$ into that expression and get $np$ and $np(np + 1 - p)$ respectively, as expected. 
+
+<!-- Naturally, a follow-up question is whether we can do better than sub-quadratic—and the answer is yes. Depending on how far you’re willing to go down the rabbit hole, this can be made nearly linear. For a *slightly* faster approach, however, we can resort to the Fast Fourier Transform (FFT) to improve it to ~  $\mathcal{O}(k\log k)$. In particular, we make the following observations:
+
+* $(n + 1)p\sum_{j = 0}^{k - 1}S(j)\binom{k - 1}{j} = (k-1)!(n + 1)p\sum_{j = 0}^{k - 1}\frac{S(j)}{j!}\frac{1}{(k - 1 - j)!}$. -->
