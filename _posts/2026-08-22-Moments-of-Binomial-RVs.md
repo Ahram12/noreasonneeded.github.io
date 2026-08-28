@@ -4,7 +4,7 @@ title: "Algorithms for Computing Moments of Binomial RVs"
 date: 2026-08-22 10:00:00 -0700
 categories: mathematics
 ---
-A standard introduction to Probability often asks students to tediously compute various moments of distributions by hand, only to later tell them about things like Moment Generating Functions (MGFs). In general, they are a superior tool, however, some distributions actually allow for fairly clean recursive expositions without resorting to that machinery. To that point, in this post, our goal will be: given a Binomal Random Variable, with fixed support and probabilty, to describe a recursion for computing its moments. 
+A standard introduction to Probability often asks students to tediously compute various moments of distributions by hand, only to later tell them about things like Moment Generating Functions (MGFs). In general, they are a superior tool, however, some distributions actually allow for fairly clean recursive expositions without resorting to that machinery. To that point, in this post, our goal will be: given a Binomal Random Variable, with fixed support and probabilty, to describe a recursion for computing its moments.
 
 ### Definition
 
