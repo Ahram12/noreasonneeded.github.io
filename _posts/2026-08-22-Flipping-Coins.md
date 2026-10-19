@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Studying Asymptotics of Flipping Coins"
-date: 2026-08-22 10:00:00 -0700
+date: 2030-08-22 10:00:00 -0700
 categories: mathematics
 ---
 

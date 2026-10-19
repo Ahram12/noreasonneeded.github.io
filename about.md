@@ -7,16 +7,10 @@ title: About
 
 Welcome to **No Reason Needed**.
 
-This is my personal mathematics blog, where I write
-about mathematics, problems, ideas, and things I find
+This is my personal blog, where I write
+about math, ideas, and things I find
 interesting.
-
-## Why "No Reason Needed"?
-
-Because sometimes you don't need a reason to spend
-an afternoon thinking about an interesting mathematical
-problem.
 
 ## About the author
 
-Put whatever you would like here.
+Hello! My name is Ahram Feigenbaum and welcome to my blog! I am a Data Scientist at a marketing measurement start-up called Paramark. I am interested in math (classical analysis, Complex Analysis, Harmonic Analysis, and Sphere Packing), programming (Python and Rust), applied modeling, and machine learning. 
