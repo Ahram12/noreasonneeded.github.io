@@ -93,15 +93,15 @@
   </li>
 </ul>
 
-<p>These curves can be viewed through a broad dichotomy: those that exhibit an S shape (the Logistic family and the Hill family when $n &gt; 1$), and those that are purely concave (the Negative Exponential family and the Hill family when $0 &lt; n &lt; 1$). in a more practical sense, the former class corresponds to functions that do not exhibit diminishing returns from their onsets while the latter class does.</p>
+<p>These curves can be viewed through a broad dichotomy: those that exhibit an S shape (the Logistic family and the Hill family when $n &gt; 1$), and those that are purely concave (the Negative Exponential family and the Hill family when $0 &lt; n &lt; 1$). In a more practical sense, the former class corresponds to functions that do not exhibit diminishing returns from their onsets while the latter class does.</p>
 
-<p>Many open-source Media Mix Models (MMMs), including LightweightMMM, Meridian, and Robyn, produce saturation curves of these types. This motivated a recent exercise in which we asked whether we could fit models from the families above to appropriately normalized $(\text{spend}, \text{marginal return})$ pairs emitted by collections of models for a particular location–media-channel pair.</p>
+<p>Many open-source Media Mix Models (MMMs), including LightweightMMM, Meridian, and Robyn, produce saturation curves of these types. This motivated a recent exercise in which we asked whether we could fit models from the families above to appropriately normalized $(\text{spend}, \text{incremental outcome})$ pairs emitted by collections of models for a particular location–media-channel pair.</p>
 
 <h3 id="what-this-note-does">What this Note Does</h3>
 
 <p>Fitting a single model from one of these families is a fairly standard exercise. A more interesting follow-up question is whether we can fit the data to countable (possibly infinite) sums of models from the same family. Marketers often have intuition about the shape of a particular channel’s saturation curve and may assume that it belongs to one of the two broad classes described above. We will make the same assumption here: our mixture models will consist only of components from a single family.</p>
 
-<p>We characterize the concave and S shaped classes, provide via the ill-posedness of the Laplace transform why identifying functions from noisy data in the Concave case is difficult, and give more concrete modeling strategies as a follow up.</p>
+<p>We characterize the concave and S shaped classes, provide via the ill-posedness of the Laplace inversion, why identifying functions from noisy data in the Concave case is difficult, and give more concrete modeling strategies as a follow up.</p>
 
 <h3 id="concave-saturation-curves">Concave Saturation Curves</h3>
 
@@ -113,11 +113,11 @@
 A Bernstein function $f(t)$ is a non-negative function whose derivative is completely monotone (i.e., $f$ is smooth and satisfies $(-1)^{n - 1}\frac{d^{n}}{dt^{n}}f(t) \geq 0$ for all $n \geq 1$). Every Bernstein function has the following Lévy-Khintchine Representation:
 $$ f(t) = c + dt + \int_{0}^{\infty}(1- e^{-tx})\mu(dx), $$
 where $c, d \geq 0$ and $\mu$ is a positive Borel measure on the positive real half-line such that 
-$$ \int _{0}^{\infty}\min(1,x)\mu(dx) &lt; \infty $$. 
-
+$$ \int _{0}^{\infty}\min(1,x)\mu(dx) &lt; \infty.$$ 
+The converse is true as well, that is, if any function is of the form it's a Bernstein function too. 
 </div>
 
-<p>Note that the above implies that $\mu$ is a sigma-finite Radon measure. Define $\mathcal{B}$ to be the set of Bernstein functions. In our case, $C$ is precisely the case when $\mu$ is a atomic (countably supported) measure, i.e., $\mu = \sum_{i \in S}a_{i}\delta_{b_{i}} $. First, we prove a standard approximation result for finite Borel measures on compact sets:</p>
+<p>Note that the above implies that $\mu$ is a sigma-finite Radon measure. Define $\mathcal{B}$ to be the set of Bernstein functions. In our case, $C$ is precisely the case when $\mu$ is an atomic (countably supported) measure, i.e., $\mu = \sum_{i \in S}a_{i}\delta_{b_{i}} $. First, we prove a standard approximation result for finite Borel measures on compact sets:</p>
 
 <h3 id="lemma-1">Lemma 1</h3>
 
@@ -201,7 +201,7 @@ $$ f(t) = \langle g_{t}, \kappa \rangle = \lim_{k \xrightarrow{} \infty} \langle
 So, weak * convergence implies pointwise convergence giving us our pointwise convergence.
 <br />
 <br />
-Next, given any $f \in \mathcal{B}$, there is a corresponding $\kappa$, and a finite approximating sequence $\kappa_{k} = \kappa(\infty)\delta_{\infty} + \kappa(0)\delta_{0} + \sum_{k}w_{k}\delta_{x_{k}}$. Here, the $x_{k}$ are in the interval $(0, \infty)$ so our above inversion map gives $d = \kappa({0}), c = \kappa({\infty})$, and $\mu_{k} = \sum_{k}a_{k}\delta_{b_{k}}$ with $a_{i} = \frac{w_{k}}{\min(x, 1)}$ and $b_{i} = x_{k}$. Further, our delayed convergence requirements become exactly $\sum_{k}a_{k}\min(1, b_{k}) &lt; \infty$ by the Levy condition. This gives the claimed approximation.
+Next, given any $f \in \mathcal{B}$, there is a corresponding $\kappa$, and a finite approximating sequence $\kappa_{k} = \kappa(\{ \infty \})\delta_{\infty} + \kappa(\{ 0 \})\delta_{0} + \sum_{k}w_{k}\delta_{x_{k}}$. Here, the $x_{k}$ are in the interval $(0, \infty)$ so our above inversion map gives $d = \kappa({0}), c = \kappa({\infty})$, and $\mu_{k} = \sum_{k}a_{k}\delta_{b_{k}}$ with $a_{k} = \frac{w_{k}}{\min(x, 1)}$ and $b_{k} = x_{k}$. Further, our delayed convergence requirements become exactly $\sum_{k}a_{k}\min(1, b_{k}) &lt; \infty$ by the Levy condition. This gives the claimed approximation.
  <br />
  <br />
 Finally, since $f$ is uniformly continuous on $[\alpha,\beta]$, choose a partition $\alpha=t_0&lt;t_1&lt;\dots&lt;t_m=\beta$ with $f(t_j)-f(t_{j-1})&lt;\varepsilon$ for every $j$. There are finitely many partition points, so pointwise convergence gives $K$ such that $|f_k(t_j)-f(t_j)|&lt;\varepsilon$ for all $j$ and all $k\ge K$. Take $x\in[t_{j-1},t_j]$ and $k\ge K$. Monotonicity of $f_k$ gives the upper bound
@@ -219,14 +219,14 @@ From the above, we have that identifying functions in the concave case is actual
     <p>$f(0) = 0$</p>
   </li>
   <li>
-    <p>$f$ has a finite aymptote at $\infty$</p>
+    <p>$f$ has a finite asymptote at $\infty$</p>
   </li>
 </ul>
 
-<p>The first condition says we get no incremental return if we spend $0$ dollars and the second says that we have sub-linear growth at infinity, both reasonable assumptions. Together, these two say that that linear part of our approximation function vanishes and we are left only with sums of members of the Negative Exponential family.
+<p>The first condition says we get no incremental return if we spend $0$ dollars and the second says that we have bouned growth at infinity, both reasonable assumptions. Together, these two say that the linear part of our approximation function vanishes and we are left only with sums of members of the Negative Exponential family.
 <br />
 <br />
-Continuing, our problem now becomes identifying $\mu$ given our measurements pairs of spend data vs. returns.This however is known to be an ill-posed problem: up to a derivative, we are essentially asking if we can invert a Laplace transform using data only from the real-line, which although possible (the Post Widder Inversion Formula for example), numerical methods are well known to be ill-posed due to small perturbations in data leading to drastically different outcomes, see <a href="https://www.sciencedirect.com/science/article/abs/pii/S0096300313003731">here</a> for example. Thus, because marketing data, even in cases with large variations in spend, are assuredly noisy, such exact methods are not promising. This gives a more precise explanation, in addition to marketer intuition, as to why identification of saturation curves is difficult. All hope is not lost however, instead we turn this into an estimation problem, which we discuss at the end of this note.
+Continuing, our problem now becomes identifying $\mu$ given our measurements pairs of spend data vs. returns. This however is known to be an ill-posed problem: up to a derivative, we are essentially asking if we can invert a Laplace transform using data only from the real-line, which although possible (the Post Widder Inversion Formula for example), numerical methods are well known to be ill-posed due to small perturbations in data leading to drastically different outcomes, see <a href="https://www.sciencedirect.com/science/article/abs/pii/S0096300313003731">here</a> for example. Thus, because marketing data, even in cases with large variations in spend, are assuredly noisy, such exact methods are not promising. This gives a more precise explanation, in addition to marketer intuition, as to why identification of saturation curves is difficult. All hope is not lost however, instead we turn this into an estimation problem, which we discuss at the end of this note.
  <br /></p>
 
 <h3 id="s-shaped-saturation-curves">S-Shaped Saturation Curves</h3>
@@ -235,10 +235,10 @@ Continuing, our problem now becomes identifying $\mu$ given our measurements pai
 
 <ul>
   <li>
-    <p><strong>Hill</strong>: $f(x) = \frac{ax^{n}}{k^{n} + x^{n}}$, for $a, k &gt; 0 n &gt; 1$, so, $f(x) = a \cdot \sigma(n(\log x - \log k))$</p>
+    <p><strong>Hill</strong>: $f(x) = \frac{ax^{n}}{k^{n} + x^{n}}$, for $a, k &gt; 0, n &gt; 1$, so, $f(x) = a \cdot \sigma(n(\log x - \log k))$</p>
   </li>
   <li>
-    <p><strong>Logistic</strong>: $f(x) = \frac{1}{1 + e^{-a(x - b)}}$, for $a, b \geq 0$, so, $f(x) = \sigma(-a(x - b))$</p>
+    <p><strong>Logistic</strong>: $f(x) = \frac{1}{1 + e^{-a(x - b)}}$, for $a, b \geq 0$, so, $f(x) = \sigma(a(x - b))$</p>
   </li>
 </ul>
 
@@ -257,13 +257,13 @@ For any compact interval $K \subset [0, \infty)$ we can approximate elements of 
 
 <div class="proof">
 <br />
-Choose $f \in C^{*}(K)$ and let $K = [\alpha,\beta]$ for some $\alpha, \beta \in \mathbb{R}$. Fix $\epsilon &gt; 0$ and choose $\delta &gt; 0$ such that $\left| f(x) - f(y) \right| &lt; \epsilon$ if $\left| x - y \right| &lt; \delta$. Define a partition $P_{\delta} = \{p_{0} = \alpha, p_{1}, ...,p_{N-1} = \beta\}$ of $K$ such that the difference between any successive $p_{i}$ is equal to $ h &lt;\delta$. Define
-$$g(x) = \sum_{j = 0}^{N - 1}c_{j}\mathbb{1}_{\{x \geq p_{j}\}} + f(\alpha),$$
-where $c_{j} = f(p_{j}) - f(p_{j - 1})$. Observe that $g$ is monotonically increasing and if $x_{0} \in [p_{s - 1}, p_{s})$ then $G(x_{0}) = f(p_{s - 1})$. Hence,
+Choose $f \in C^{*}(K)$ and let $K = [\alpha,\beta]$ for some non-negative $\alpha, \beta \in \mathbb{R}$. Fix $\epsilon &gt; 0$ and choose $\delta &gt; 0$ such that $\left| f(x) - f(y) \right| &lt; \epsilon$ if $\left| x - y \right| &lt; \delta$. Define a partition $P_{\delta} = \{p_{0} = \alpha, p_{1}, ...,p_{N-1} = \beta\}$ of $K$ such that the difference between any successive $p_{i}$ is equal to $ h &lt;\delta$. Define
+$$g(x) = \sum_{j = 1}^{N - 1}c_{j}\mathbb{1}_{\{x \geq p_{j}\}} + f(\alpha),$$
+where $c_{j} = f(p_{j}) - f(p_{j - 1})$. Observe that $g$ is monotonically increasing and if $x_{0} \in [p_{s - 1}, p_{s})$ then $g(x_{0}) = f(p_{s - 1})$. Hence,
 $$\sup_{x \in K} \left| f - g\right| &lt; \epsilon.$$
  <br />
  <br />
-Next, define $G(x) = \sum_{j = 1}^{N - 1}c_{j}\sigma(w(x - p_{j})) + f(\alpha)$ for $w \in \mathbb{R}$ and observe that the inequality
+Next, define $G(x) = \sum_{j = 1}^{N - 1}c_{j}\sigma(w(x - p_{j})) + f(\alpha)$ for positive $w \in \mathbb{R}$ and observe that the inequality
 $$\left|\mathbb{1}_{\{x \geq 0\}} - \sigma(x) \right| \leq e^{-\left| x \right|}$$
 implies that 
 $$\left| g(x) - G(x) \right| \leq \sum_{j}c_{j}e^{-\left| w(x - p_{j}) \right|} .$$
@@ -281,7 +281,7 @@ If we choose $w &gt; \frac{1}{h}\log(\frac{f(\beta) - f(\alpha)}{\epsilon})$, th
     <p>$f(0) = 0$</p>
   </li>
   <li>
-    <p>$f$ has a finite aymptote at $\infty$</p>
+    <p>$f$ has a finite asymptote at $\infty$</p>
   </li>
 </ul>
 
@@ -292,7 +292,7 @@ If we choose $w &gt; \frac{1}{h}\log(\frac{f(\beta) - f(\alpha)}{\epsilon})$, th
 
 <p>Strategy 1: Non-Negative Least Squares</p>
 
-<p>We discretize the problem by selecting a log spaced grid $B$ of points $(b_{1}, b_{2},..,b_{N})$, where the $N$ (say $N \text{~} 200$) points are chosen from a plausible range for a specific marketing channel. These $N$ points are in fact the atomic approximation from Lemma 2. If we let our regression pairs be $(x_{i}, y_{i})$ where the $x_{i}$ are spend levels and the $y_{i}$ are estimated levels of incremental outcomes, we can form a design matrix $X_{ij} = 1 - e^{-x_{i}b_{j}}$. If we let $Y$ denote the vector of our $y_{i}$ and $a$ denote the matrix corresponding to our $a_{j} \geq 0$ (recall our summands are of the form $a_{j}(1 - e^{-b_{j}x})$ ) we have the problem:</p>
+<p>We discretize the problem by selecting a log spaced grid $B$ of points $(b_{1}, b_{2},..,b_{N})$, where the $N$ (say $N \text{~} 200$) points are chosen from a plausible range for a specific marketing channel. These $N$ points are in fact the atomic approximation from Lemma 2. If we let our regression pairs be $(x_{i}, y_{i})$ where the $x_{i}$ are spend levels and the $y_{i}$ are estimated levels of incremental outcomes, we can form a design matrix $X_{ij} = 1 - e^{-x_{i}b_{j}}$. If we let $Y$ denote the vector of our $y_{i}$ and $a$ denote the vector corresponding to our $a_{j} \geq 0$ (recall our summands are of the form $a_{j}(1 - e^{-b_{j}x})$ ) we have the problem:</p>
 
 \[\arg\min_{a \in \mathbb{R}^{N}_{\geq 0}}\Vert{}Y - Xa\Vert{}_2^2,\]
 
@@ -300,13 +300,13 @@ If we choose $w &gt; \frac{1}{h}\log(\frac{f(\beta) - f(\alpha)}{\epsilon})$, th
 
 <p>Strategy 2: Tikhonov Regularization</p>
 
-<p>Consider:</p>
+<p>Consider $g \geq 0$ such that:</p>
 
-\[F(s) = \int_{0}^{\infty}(1 - e^{-st})f(t)dt,\]
+\[F(s) = \int_{0}^{\infty}(1 - e^{-st})g(t)dt,\]
 
-<p>and instead of trying to invert this relationship directly we again discretize by say taking a log-spaced grid of values for $t$ on $(0, \infty)$ to write the integral as a sum approximation of the values at $e^{-st}f(t)$ and call this operator evaluated at our grid $A$ and consider instead the minimization problem</p>
+<p>and instead of trying to invert this relationship directly we again discretize by say taking a log-spaced grid of values for $t$ on $(0, \infty)$ to write the integral as a sum approximation of the values at $(1 - e^{-st})g(t)$ and call this operator evaluated at our grid $A$ and consider instead the minimization problem</p>
 
-\[\min_{f}\Vert{}Af - y\Vert{}_2^2 + \alpha\Vert{}Lf\Vert{}_2^2,\]
+\[\min_{g}\Vert{}Ag - y\Vert{}_2^2 + \alpha\Vert{}Lf\Vert{}_2^2,\]
 
 <p>where $\alpha &gt; 0$ is our regularization parameter and $L$ is a penalty operator (say a second derivative estimated with finite differences) to enforce smoothness (think about a spline penalty for example). Tikhonov Regularization can be thought of as the smoothing alternative to Non-Negative Least Squares (a reasonable first approach).</p>
 
@@ -315,19 +315,19 @@ If we choose $w &gt; \frac{1}{h}\log(\frac{f(\beta) - f(\alpha)}{\epsilon})$, th
 <ol>
   <li>The concave case is rigid, but hard to identify.
 <br />
-As we have seen, the closure of the concave case is the Bernstein functions, so this class has a precise, characterizable shape. The price to pay for this structure however, is the necessity of recovering the underlying measure $\mu$ from noisy data: we are combining an ill-posed inverse problem (Laplace inversion from non-negative real-line data) in a bounded spend interval. 
+As we have seen, the closure of the concave case is the Bernstein functions, so this class has a precise, characterizable shape. The price to pay for this structure however, is the necessity of recovering the underlying measure $\mu$ from noisy data: we are compounding an ill-posed inverse problem (Laplace inversion from non-negative real-line data) by observing only a bounded spend interval. 
 <br /></li>
-  <li>The S-shape case is flexible but allows for more concrete identification.
+  <li>The S-shape case is flexible but erases the shape.
 <br />
-The closure of the functions we looked at here take on a much brader class, continuous monotone functions, however we have constructive strategy to create approximates on the desired amount of accuracy. That being said, the S-shape is generally not preserved: this approach recovers a monotonic curve and not necessarily meaningful aspects of it. Hence, the the Concave and S-shape cases ultimately differ in how shape they impose and not the ability to recover meaningful information about them. 
+The closure of the functions we looked at here take on a much broader class, continuous monotone functions, however we have constructive strategy to create approximates to the desired amount of accuracy. That being said, the S-shape is generally not preserved: this approach recovers a monotonic curve and not necessarily meaningful aspects of it. Hence, the Concave and S-shape cases ultimately differ in how shape they impose and not the ability to recover meaningful information about them. 
 <br /></li>
   <li>Trust curves more than individual components. 
 <br />
-In the concave case different choices of pairs $(a_{i}, b_{i})$ can produce similar curves over the observed spend range. This means that is unwise to focus too much on individual parameters and instead on fitted curves and derived quantities such as marginal returns. Individual decay rates can be noisy and claimed precision for any media channel warrants skepticism.
+In the concave case different choices of pairs $(a_{i}, b_{i})$ can produce similar curves over the observed spend range. This means that it is unwise to focus too much on individual parameters and instead on fitted curves and derived quantities such as marginal returns. Individual decay rates can be noisy and claimed precision for any media channel warrants skepticism.
 <br /></li>
   <li>Practical starting points.
 <br />
-In the Concave case, starting with a small grid of candidate rates and solving Non-Negative Least Squares (this is a convex problem and tends to return sparse solutions via conditions such as the KKT conditions) is a good place to start. If insufficient, Tikhonov regularization offers a smoothing alternative. In both cases, check results for stability (is the design matrix degenerate or do small perturbations in data lead to large changes in curves?) before drawing conclusions.
+In the Concave case, starting with a small grid of candidate rates and solving Non-Negative Least Squares; this is a convex problem and tends to return sparse solutions (only as many atoms as observations) via conditions such as the KKT conditions. If insufficient, Tikhonov regularization offers a smoothing alternative. In both cases, check results for stability (is the design matrix degenerate or do small perturbations in data lead to large changes in curves?) before drawing conclusions.
 <br /></li>
 </ol>
 
