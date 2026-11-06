@@ -1,82 +1,31 @@
 ---
+layout: default
 ---
 
-<!DOCTYPE html>
-<html lang="en">
+<section class="hero">
 
-<head>
-    <meta charset="UTF-8">
-
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
-
-    <title>No Reason Needed</title>
-
-    <link rel="stylesheet"
-          href="{{ '/style.css' | relative_url }}">
-</head>
-
-<body>
-
-<header>
-    <div class="header-inner">
-
-        <a class="site-title"
-           href="{{ '/' | relative_url }}">
-            No Reason Needed
-        </a>
-
-        <nav>
-            <a href="{{ '/' | relative_url }}">Home</a>
-            <a href="{{ '/about.html' | relative_url }}">About</a>
-            <a href="{{ '/posts.html' | relative_url }}">Posts</a>
-        </nav>
-
-    </div>
-</header>
-
-
-<main>
+    <p class="hero__eyebrow">{{ site.description }}</p>
 
     <h1>My Math Blog</h1>
 
-    <p>
-        Welcome! This is where I write about mathematics,
-        ideas, problems, and whatever else catches my attention.
+    <p class="hero__lede">
+        Welcome! This is where I write about mathematics, ideas, problems,
+        and whatever else catches my attention.
     </p>
 
-    <h2>Recent Posts</h2>
+</section>
+
+<section>
+
+    <div class="section-head">
+        <h2>Recent</h2>
+        <a href="{{ '/posts.html' | relative_url }}">All posts &rarr;</a>
+    </div>
 
     <ul class="post-list">
-
-        {% for post in site.posts limit:2 %}
-
-        <li>
-
-            <a href="{{ post.url | relative_url }}">
-                {{ post.title }}
-            </a>
-
-            <span class="post-date">
-                {{ post.date | date: "%B %d, %Y" }}
-            </span>
-
-        </li>
-
+        {% for post in site.posts limit: 3 %}
+            {% include post-card.html post=post %}
         {% endfor %}
-
     </ul>
 
-</main>
-
-
-<footer>
-
-    <p>
-        © {{ site.time | date: "%Y" }} No Reason Needed
-    </p>
-
-</footer>
-
-</body>
-</html>
+</section>

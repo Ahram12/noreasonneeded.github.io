@@ -1,0 +1,26 @@
+<li>
+    <a class="post-card" href="{{ include.post.url | relative_url }}">
+
+        <div class="post-card__meta">
+            <time datetime="{{ include.post.date | date_to_xmlschema }}">
+                {{ include.post.date | date: "%B %-d, %Y" }}
+            </time>
+            {% if include.post.categories.size > 0 %}
+            <span class="dot"></span>
+            <span>{{ include.post.categories | first }}</span>
+            {% endif %}
+        </div>
+
+        <h3 class="post-card__title">{{ include.post.title }}</h3>
+
+        {% comment %}
+          Prefers a hand-written description; otherwise falls back to
+          the post's own opening paragraph.
+        {% endcomment %}
+        {% assign blurb = include.post.description | default: include.post.excerpt %}
+        {% if blurb %}
+        <p class="post-card__excerpt">{{ blurb | strip_html | normalize_whitespace | truncatewords: 28 }}</p>
+        {% endif %}
+
+    </a>
+</li>
