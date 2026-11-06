@@ -3,6 +3,7 @@ layout: post
 title: "Saturation Curves with Multi-Rate Decay"
 date: 2026-10-25 10:00:00 -0700
 categories: mathematics
+description: "Characterising the concave and S-shaped saturation curves as mixtures, why the ill-posedness of Laplace inversion makes the concave case hard to identify from noisy data, and what to do about it when modelling."
 ---
 
 ## Contents

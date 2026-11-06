@@ -3,27 +3,15 @@ layout: default
 title: Posts
 ---
 
-# Posts
+<section class="hero">
+    <h1>Posts</h1>
+    <p class="hero__lede">
+        Everything published so far, newest first.
+    </p>
+</section>
 
-<div class="posts">
-    <ul class="post-list">
-
-        {% for post in site.posts %}
-
-        <li>
-
-            <a href="{{ post.url | relative_url }}">
-                {{ post.title }}
-            </a>
-
-            <span class="post-date">
-                {{ post.date | date: "%B %d, %Y" }}
-            </span>
-
-        </li>
-
-        {% endfor %}
-
-    </ul>
-</div>
-    
+<ul class="post-list">
+    {% for post in site.posts %}
+        {% include post-card.html post=post %}
+    {% endfor %}
+</ul>
