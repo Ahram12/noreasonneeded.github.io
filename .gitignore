@@ -1,0 +1,12 @@
+# Jekyll build output and caches. GitHub Actions rebuilds the site from
+# source on every push, so none of this needs to be in the repository.
+_site/
+.jekyll-cache/
+.jekyll-metadata
+
+# Gems, if you ever run bundler outside the container.
+vendor/
+.bundle/
+
+# macOS
+.DS_Store

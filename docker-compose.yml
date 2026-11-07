@@ -1,0 +1,50 @@
+# Local preview:  docker compose up
+# Then open       http://localhost:4000
+# Stop with       Ctrl-C   (or `docker compose down`)
+#
+# Edits to posts, layouts and CSS reload in the browser automatically.
+
+services:
+  site:
+    build: .
+
+    ports:
+      - "4000:4000"    # the site
+      - "35729:35729"  # LiveReload, used by --livereload
+
+    volumes:
+      # Your working copy, live inside the container. Edits on the host
+      # are picked up immediately; the site Jekyll generates is written
+      # back to ./_site.
+      - .:/srv/jekyll
+
+      # Installed gems, cached between runs so `up` is fast after the
+      # first one.
+      - gems:/usr/local/bundle
+
+    # Deliberately one line. A YAML folded block (>) keeps the newlines
+    # on more-indented lines, and in shell a newline ends the command —
+    # so a "tidier" multi-line version silently drops every flag below.
+    #
+    #   bundle check || bundle install
+    #       cheap no-op when the cached gems already match Gemfile.lock;
+    #       reinstalls only after you change a gem, which the named
+    #       volume would otherwise hide.
+    #   --host 0.0.0.0
+    #       bind to all interfaces. The container's own 127.0.0.1 is not
+    #       reachable from macOS, so without this the port mapping above
+    #       goes nowhere.
+    #   --baseurl ''
+    #       overrides the /noreasonneeded.github.io prefix in
+    #       _config.yaml so the site serves at the root of
+    #       localhost:4000. Actions does the reverse at build time,
+    #       passing the real base path, so neither side hardcodes it.
+    #   --livereload
+    #       refreshes the browser on rebuild, over port 35729.
+    #   --force_polling
+    #       filesystem events do not cross the macOS/Linux VM boundary
+    #       reliably, so watch by polling instead.
+    command: sh -c "bundle check || bundle install && bundle exec jekyll serve --host 0.0.0.0 --baseurl '' --livereload --force_polling"
+
+volumes:
+  gems:
