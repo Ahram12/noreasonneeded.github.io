@@ -4,6 +4,29 @@ description: "A mathematics blog"
 url: "https://ahram12.github.io"
 baseurl: "/noreasonneeded.github.io"
 
+# Files in the repo that are not part of the site. Anything not listed
+# here gets copied into _site and published.
+#
+# Note: setting this key REPLACES Jekyll's built-in exclude list rather
+# than adding to it, so the defaults have to be repeated below.
+exclude:
+  # Jekyll's defaults
+  - Gemfile
+  - Gemfile.lock
+  - gemfiles/
+  - .sass-cache/
+  - .jekyll-cache/
+  - node_modules/
+  - vendor/bundle/
+  - vendor/cache/
+  - vendor/gems/
+  - vendor/ruby/
+  # Local tooling
+  - Dockerfile
+  - docker-compose.yml
+  - .claude/
+  - README.md
+
 markdown: kramdown
 
 kramdown:
