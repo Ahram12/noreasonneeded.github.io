@@ -1,9 +1,14 @@
 # Local preview environment for the blog.
 #
-# Pinned to the same Ruby as .ruby-version, which is also what GitHub
-# Actions uses. Keeping all three in step is what stops "works locally,
-# fails in CI" — the exact problem that broke the first deploy.
-FROM ruby:3.4.1-slim
+# Tracks the same Ruby series as .ruby-version, which is also what
+# GitHub Actions reads. Keeping all three in step is what stops "works
+# locally, fails in CI" — the exact problem that broke the first deploy.
+#
+# The series (3.4) rather than an exact patch (3.4.1) is deliberate:
+# GitHub's runner images only carry the newest patch of each series, so
+# an exact pin 404s as soon as a new patch ships. Both this tag and
+# .ruby-version now follow the series and stay aligned on their own.
+FROM ruby:3.4-slim
 
 # build-essential: most gems here ship prebuilt binaries, but a few C
 # extensions (bigdecimal, via activesupport) still compile from source.
