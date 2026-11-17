@@ -160,7 +160,7 @@ From the above, we have that identifying functions in the Concave case is actual
 
 The first condition says we get no incremental return if we spend $0$ dollars and the second says that we have bounded growth at infinity, both reasonable assumptions. Together, these two say that the linear part of our approximation function vanishes (Dominated Convergence for example) and we are left only with sums of members of the Negative Exponential family. 
 
-We can actually say even more about this point: it implies that $\mu$ is actually a finite measure. Indeed we have that $f(\infty) = \lim_{t \rightarrow \infty} = \mu((0, \infty))$. If we let $A$ denote this common value then 
+We can actually say even more about this point: it implies that $\mu$ is actually a finite measure. Indeed we have that $f(\infty) = \lim_{t \rightarrow \infty}f(t) = \mu((0, \infty))$. If we let $A$ denote this common value then 
 
 $$ A - f(t) = \int_{0}^{\infty}e^{-tx}\mu(dx) $$ 
 
