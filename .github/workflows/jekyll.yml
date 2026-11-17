@@ -34,8 +34,14 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
       - name: Setup Ruby
-        # https://github.com/ruby/setup-ruby/releases/tag/v1.207.0
-        uses: ruby/setup-ruby@4a9ddd6f338a97768b8006bf671dfbad383215f4
+        # https://github.com/ruby/setup-ruby/releases/tag/v1.338.0
+        #
+        # Pinned to a SHA so the action cannot change under us — which
+        # also means it needs bumping by hand. setup-ruby matches the
+        # runner against a hardcoded list of GitHub-hosted images, so a
+        # pin older than the current ubuntu-latest fails with "detected
+        # as self-hosted". Bump this when that happens.
+        uses: ruby/setup-ruby@b3aaceaef7e0ee231b499e7b5f49c03fc1d32199
         with:
           # Version comes from .ruby-version (3.4.1). Gemfile.lock was
           # resolved on 3.4 and pulls in activesupport 8.x, which needs

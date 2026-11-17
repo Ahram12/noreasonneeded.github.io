@@ -1,0 +1,19 @@
+# Watches the actions used in .github/workflows/ and opens a pull
+# request when any of them publishes a new release.
+#
+# This is what makes SHA-pinning the actions sustainable. A pin cannot
+# be moved by anyone else, which is the point — but it also means it
+# goes stale silently until a build breaks. Dependabot turns that into
+# a pull request you can merge on your own schedule instead of a failed
+# deploy you discover at an inconvenient moment.
+version: 2
+
+updates:
+  - package-ecosystem: "github-actions"
+    # "/" means the repository root; Dependabot looks in .github/workflows
+    # from there. It is not a path to the workflow files themselves.
+    directory: "/"
+    schedule:
+      interval: "monthly"
+    commit-message:
+      prefix: "ci"
