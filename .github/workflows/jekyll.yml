@@ -11,6 +11,12 @@ on:
   push:
     branches: ["main"]
 
+  # Also build on pull requests, so a broken build shows up on the PR
+  # instead of after the merge. The deploy job below is gated to push
+  # events, so opening a PR never publishes anything.
+  pull_request:
+    branches: ["main"]
+
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
@@ -23,8 +29,10 @@ permissions:
 # Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
 # However, do NOT cancel in-progress runs as we want to allow these production deployments to complete.
 concurrency:
-  group: "pages"
-  cancel-in-progress: false
+  # Grouping by ref keeps PR checks from queueing behind a live deploy.
+  # Superseded PR runs are cancelled; deploys to main never are.
+  group: "pages-${{ github.ref }}"
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 
 jobs:
   # Build job
@@ -62,6 +70,9 @@ jobs:
 
   # Deployment job
   deploy:
+    # Only ever publishes from a push to main. On a pull request the
+    # build job above still runs, but this one is skipped entirely.
+    if: github.event_name == 'push'
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
