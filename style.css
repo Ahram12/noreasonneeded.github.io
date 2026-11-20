@@ -993,6 +993,88 @@ details .proof {
 
 
 /* =========================================================
+   8b. Figures
+   ========================================================= */
+
+figure {
+    margin: 2.5rem 0;
+}
+
+figure img {
+    display: block;
+    width: 100%;
+    border: 1px solid var(--rule);
+    border-radius: var(--radius);
+}
+
+figcaption {
+    margin-top: 0.85rem;
+    color: var(--ink-muted);
+    font-family: var(--font-sans);
+    font-size: 0.8125rem;
+    line-height: 1.55;
+}
+
+/* Plots exported from matplotlib carry a white background, which is a
+   glaring panel on a dark page. Inverting and rotating the hue back
+   gives a dark plot with its original line colours intact.
+
+   Opt-in via class="plot" rather than applying to every image, so a
+   photograph added later is not inverted along with the charts. */
+.plot {
+    background: #ffffff;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) .plot {
+        filter: invert(1) hue-rotate(180deg);
+        background: transparent;
+    }
+}
+
+:root[data-theme="dark"] .plot {
+    filter: invert(1) hue-rotate(180deg);
+    background: transparent;
+}
+
+
+/* =========================================================
+   8c. Citations and references
+   ========================================================= */
+
+/* Citation markers in the prose. Kept small and unobtrusive so a
+   sentence carrying two of them still reads cleanly. */
+sup[id^="cite-"] a {
+    padding: 0 0.1em;
+    font-family: var(--font-sans);
+    font-size: 0.72em;
+    font-weight: 500;
+    text-decoration: none;
+}
+
+sup[id^="cite-"] a:hover {
+    text-decoration: underline;
+}
+
+/* The reference list itself: slightly smaller than body prose, with
+   room between entries so wrapped citations stay legible. */
+#references + ol {
+    font-size: 0.9375rem;
+    line-height: 1.6;
+}
+
+#references + ol li {
+    margin: 0.85rem 0;
+}
+
+/* The ↩ back-link returning to the citation point. */
+#references + ol a[href^="#cite-"] {
+    margin-left: 0.2em;
+    text-decoration: none;
+}
+
+
+/* =========================================================
    9. Code
    ========================================================= */
 
