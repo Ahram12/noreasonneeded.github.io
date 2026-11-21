@@ -354,7 +354,7 @@ for _ in range(NUM_BOOTSTRAP_REPLICATES):
         n_failed += 1
         continue
     curves.append(X_plot @ a_r)
-    masks.append(a_r > TOL)
+    masks.append(a_r > TOLERANCE)
     num_active.append(masks[-1].sum())
 
 curves = np.array(curves)
@@ -505,7 +505,7 @@ plt.close(fig)
        alt="Atom Activation Across Replicates"
        width="960" height="640" loading="lazy">
   <figcaption>
-    Observe that our fits are quite tight inside the observed spend window but wide outside of it.
+    Distribution of activated atoms. Despite the fact that we rarely recover the true atoms, our fit is good in sample.
   </figcaption>
 </figure>
 
